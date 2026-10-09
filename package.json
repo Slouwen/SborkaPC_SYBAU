@@ -1,0 +1,12 @@
+{
+  "name": "sborkapc-sybau",
+  "version": "1.0.0",
+  "description": "Веб-приложение для сборки и реализации компьютеров",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
