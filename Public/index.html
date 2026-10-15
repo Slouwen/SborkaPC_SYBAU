@@ -6,37 +6,38 @@
     <title>Сборка компьютеров</title>
     <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <header>
-        <h1>Сборка и реализация компьютеров</h1>
+<body class="m-0 font-sans bg-slate-100 text-slate-800">
 
-        <nav>
-            <a href="/">Главная</a>
-            <a href="/components">Комплектующие</a>
-            <a href="/orders">Заказы</a>
+    <header class="bg-slate-800 text-white px-[5%] py-6">
+        <h1 class="text-2xl font-bold mb-4">Сборка и реализация компьютеров</h1>
+        <nav class="flex flex-wrap gap-6">
+            <a href="/" class="text-white no-underline hover:text-blue-300 transition-colors">Главная</a>
+            <a href="/components" class="text-white no-underline hover:text-blue-300 transition-colors">Комплектующие</a>
+            <a href="/orders" class="text-white no-underline hover:text-blue-300 transition-colors">Заказы</a>
         </nav>
     </header>
 
-    <main>
-        <h2>Панель управления</h2>
-        <p>
+    <main class="max-w-5xl mx-auto px-6 my-9">
+        <h2 class="text-2xl font-semibold mb-2">Панель управления</h2>
+        <p class="text-slate-600 mb-6">
             Информационная система для учёта комплектующих,
             заказов и процессов сборки компьютеров.
         </p>
 
-        <div class="cards">
-            <section class="card">
-                <h3>Комплектующие</h3>
-                <p>Просмотр компьютерных компонентов и их стоимости.</p>
-                <a href="/components">Перейти</a>
+        <div class="flex flex-wrap gap-5 mt-6">
+            <section class="flex-1 min-w-[240px] p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <h3 class="text-lg font-bold mb-2">Комплектующие</h3>
+                <p class="text-slate-600 mb-3">Просмотр компьютерных компонентов и их стоимости.</p>
+                <a href="/components" class="text-blue-700 font-bold no-underline hover:underline">Перейти →</a>
             </section>
 
-            <section class="card">
-                <h3>Заказы</h3>
-                <p>Просмотр заказов партнёров и их статусов.</p>
-                <a href="/orders">Перейти</a>
+            <section class="flex-1 min-w-[240px] p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <h3 class="text-lg font-bold mb-2">Заказы</h3>
+                <p class="text-slate-600 mb-3">Просмотр заказов партнёров и их статусов.</p>
+                <a href="/orders" class="text-blue-700 font-bold no-underline hover:underline">Перейти →</a>
             </section>
         </div>
     </main>
+
 </body>
 </html>

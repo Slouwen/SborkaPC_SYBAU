@@ -6,49 +6,53 @@
     <title>Комплектующие</title>
     <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <header>
-        <h1>Комплектующие</h1>
-        <nav>
-            <a href="/">Главная</a>
-            <a href="/components">Комплектующие</a>
-            <a href="/orders">Заказы</a>
+<body class="m-0 font-sans bg-slate-100 text-slate-800">
+
+    <header class="bg-slate-800 text-white px-[5%] py-6">
+        <h1 class="text-2xl font-bold mb-4">Комплектующие</h1>
+        <nav class="flex flex-wrap gap-6">
+            <a href="/" class="text-white no-underline hover:text-blue-300 transition-colors">Главная</a>
+            <a href="/components" class="text-white no-underline hover:text-blue-300 transition-colors">Комплектующие</a>
+            <a href="/orders" class="text-white no-underline hover:text-blue-300 transition-colors">Заказы</a>
         </nav>
     </header>
 
-    <main>
-        <h2>Список комплектующих</h2>
+    <main class="max-w-5xl mx-auto px-6 my-9">
+        <h2 class="text-2xl font-semibold mb-4">Список комплектующих</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Название</th>
-                    <th>Тип</th>
-                    <th>Цена</th>
-                    <th>Количество</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Intel Core i5</td>
-                    <td>Процессор</td>
-                    <td>18 000 ₽</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>RTX 4060</td>
-                    <td>Видеокарта</td>
-                    <td>35 000 ₽</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>Kingston 16GB</td>
-                    <td>Оперативная память</td>
-                    <td>5 000 ₽</td>
-                    <td>25</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="overflow-x-auto">
+            <table class="w-full mt-5 bg-white border-collapse rounded-xl overflow-hidden shadow-sm">
+                <thead>
+                    <tr class="bg-slate-200">
+                        <th class="p-4 text-left font-semibold">Название</th>
+                        <th class="p-4 text-left font-semibold">Тип</th>
+                        <th class="p-4 text-left font-semibold">Цена</th>
+                        <th class="p-4 text-left font-semibold">Количество</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-slate-200 hover:bg-slate-50">
+                        <td class="p-4">Intel Core i5</td>
+                        <td class="p-4">Процессор</td>
+                        <td class="p-4">18 000 ₽</td>
+                        <td class="p-4">20</td>
+                    </tr>
+                    <tr class="border-b border-slate-200 hover:bg-slate-50">
+                        <td class="p-4">RTX 4060</td>
+                        <td class="p-4">Видеокарта</td>
+                        <td class="p-4">35 000 ₽</td>
+                        <td class="p-4">8</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-4">Kingston 16GB</td>
+                        <td class="p-4">Оперативная память</td>
+                        <td class="p-4">5 000 ₽</td>
+                        <td class="p-4">25</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
+
 </body>
 </html>

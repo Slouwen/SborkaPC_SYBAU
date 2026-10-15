@@ -4,9 +4,13 @@
   "description": "Веб-приложение для сборки и реализации компьютеров",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build:css": "tailwindcss -i ./input.css -o ./Public/style.css --minify"
   },
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
   }
 }
