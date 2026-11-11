@@ -28,6 +28,10 @@ app.get('/sitemap.xml', (req, res) => {
     res.sendFile(path.join(__dirname, 'sitemap.xml'));
 });
 
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Public', 'dashboard.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Сайт запущен: http://localhost:${PORT}`);
 });
