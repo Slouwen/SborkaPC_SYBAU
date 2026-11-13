@@ -15,7 +15,9 @@
             Сборка и реализация компьютеров
         </div>
         <nav class="flex-1 p-4 space-y-2 text-sm">
-            <a href="/dashboard" class="block px-4 py-2 bg-slate-800 rounded-lg text-blue-300 font-semibold">Главная</a>
+            <a href="/dashboard" class="block px-4 py-2 bg-slate-800 rounded-lg text-blue-300 font-semibold">Рабочий кабинет</a>
+            <a href="/" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Главная</a>
+            <a href="/components" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Комплектующие</a>
             <a href="/orders" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Заявки</a>
             <a href="/production" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Производство</a>
             <a href="/warehouse" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Склад</a>
@@ -26,14 +28,11 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="flex-1 flex flex-col min-w-0">
-        
-        <!-- ШАПКА -->
         <header class="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
             <h1 class="text-xl font-semibold text-slate-800">Рабочий кабинет</h1>
             <div class="text-sm text-slate-500">И.А. Моторико</div>
         </header>
 
-        <!-- КАРТОЧКИ И ГРАФИКИ -->
         <div class="p-8 space-y-8 flex-1 bg-slate-100 overflow-y-auto">
             
             <!-- 4 карточки статистики -->
@@ -56,9 +55,7 @@
                 </div>
             </div>
 
-            <!-- Два блока: Заявки и Склад -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
                 <!-- Последние заявки -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
                     <h2 class="text-lg font-semibold mb-4 text-slate-800">Последние заявки</h2>

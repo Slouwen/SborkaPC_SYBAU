@@ -32,6 +32,22 @@ app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'dashboard.html'));
 });
 
+app.get('/production', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Public', 'production.html'));
+});
+
+app.get('/warehouse', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Public', 'warehouse.html'));
+});
+
+app.get('/agents', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Public', 'agents.html'));
+});
+
+app.get('/analytics', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Public', 'analytics.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Сайт запущен: http://localhost:${PORT}`);
 });
