@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рабочий кабинет — Сборка и реализация компьютеров</title>
+    <meta name="description" content="Дашборд рабочего кабинета: статистика заявок, производство и склад.">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="m-0 font-sans bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex min-h-screen">
+
+    <aside class="w-64 bg-slate-900 text-white flex flex-col hidden md:flex shrink-0">
+        <div class="p-6 text-sm font-bold border-b border-slate-700 leading-tight">
+            Сборка и реализация компьютеров
+        </div>
+        <nav class="flex-1 p-4 space-y-2 text-sm">
+            <a href="/" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Главная</a>
+            <a href="/dashboard" class="block px-4 py-2 bg-slate-800 rounded-lg text-blue-300 font-semibold">Рабочий кабинет</a>
+            <a href="/components" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Комплектующие</a>
+            <a href="/orders" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Заявки</a>
+            <a href="/production" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Производство</a>
+            <a href="/warehouse" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Склад</a>
+            <a href="/agents" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Агенты</a>
+            <a href="/analytics" class="block px-4 py-2 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">Аналитика</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-w-0">
+        <header class="bg-white dark:bg-slate-800 shadow-sm px-8 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold text-slate-800 dark:text-slate-100">Рабочий кабинет</h1>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                    <span class="dark:hidden">🌙</span>
+                    <span class="hidden dark:inline">☀️</span>
+                </button>
+                <div class="text-sm text-slate-500 dark:text-slate-400">И.А. Моторико</div>
+            </div>
+        </header>
+
+        <div class="p-8 space-y-8 flex-1 bg-slate-100 dark:bg-slate-900 overflow-y-auto">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">Новые заявки</p>
+                    <p class="text-3xl font-bold text-slate-800 dark:text-slate-100">12</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">В производстве</p>
+                    <p class="text-3xl font-bold text-slate-800 dark:text-slate-100">8</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">Критические остатки</p>
+                    <p class="text-3xl font-bold text-red-600 dark:text-red-400">5</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">Агенты</p>
+                    <p class="text-3xl font-bold text-slate-800 dark:text-slate-100">24</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 p-6">
+                    <h2 class="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">Последние заявки</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-700 pb-3">
+                            <div>
+                                <p class="font-semibold text-blue-600 dark:text-blue-400">#1048</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">ТехноМир — Игровой ПК</p>
+                            </div>
+                            <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-md text-xs font-semibold">На согласовании</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-700 pb-3">
+                            <div>
+                                <p class="font-semibold text-blue-600 dark:text-blue-400">#1047</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Сфера IT — Офисный ПК</p>
+                            </div>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-md text-xs font-semibold">В производстве</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold text-blue-600 dark:text-blue-400">#1046</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">PC Market — Рабочая станция</p>
+                            </div>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-md text-xs font-semibold">Готово</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 p-6">
+                    <h2 class="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">Состояние склада</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600 dark:text-slate-300">Видеокарты</span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm text-slate-500 dark:text-slate-400">12 шт.</span>
+                                <span class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 rounded-md text-xs font-semibold">Критично</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600 dark:text-slate-300">Процессоры</span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm text-slate-500 dark:text-slate-400">48 шт.</span>
+                                <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-md text-xs font-semibold">Норма</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600 dark:text-slate-300">ОЗУ</span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm text-slate-500 dark:text-slate-400">76 шт.</span>
+                                <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-md text-xs font-semibold">Норма</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600 dark:text-slate-300">Блоки питания</span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm text-slate-500 dark:text-slate-400">9 шт.</span>
+                                <span class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 rounded-md text-xs font-semibold">Критично</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/theme.js"></script>
+</body>
+</html>
