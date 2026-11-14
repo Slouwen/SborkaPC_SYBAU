@@ -7,9 +7,8 @@
     <meta name="description" content="Список заказов партнёров-агентов на сборку компьютеров.">
     <link rel="stylesheet" href="/style.css">
 </head>
-<body class="m-0 font-sans bg-slate-100 text-slate-800 flex min-h-screen">
+<body class="m-0 font-sans bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex min-h-screen">
 
-    <!-- ЛЕВЫЙ САЙДБАР -->
     <aside class="w-64 bg-slate-900 text-white flex flex-col hidden md:flex shrink-0">
         <div class="p-6 text-sm font-bold border-b border-slate-700 leading-tight">
             Сборка и реализация компьютеров
@@ -26,56 +25,150 @@
         </nav>
     </aside>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="flex-1 flex flex-col min-w-0">
-        <header class="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-semibold text-slate-800">Заявки</h1>
+        <header class="bg-white dark:bg-slate-800 shadow-sm px-8 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold text-slate-800 dark:text-slate-100">Заявки</h1>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                    <span class="dark:hidden">🌙</span>
+                    <span class="hidden dark:inline">☀️</span>
+                </button>
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                    + Новая заявка
+                </button>
+            </div>
         </header>
 
-        <div class="p-8 space-y-8 flex-1 bg-slate-100 overflow-y-auto">
-            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <h2 class="text-lg font-semibold mb-4 text-slate-800">Список заказов</h2>
+        <div class="p-8 space-y-6 flex-1 bg-slate-100 dark:bg-slate-900 overflow-y-auto">
+            
+            <!-- Поиск + фильтры -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 p-4 space-y-4">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Поиск по номеру или агенту..." 
+                    class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 dark:text-slate-100"
+                    oninput="filterOrders()"
+                >
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setStatusFilter('all')" class="status-btn px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white" data-status="all">Все</button>
+                    <button onclick="setStatusFilter('new')" class="status-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-status="new">Новые</button>
+                    <button onclick="setStatusFilter('confirmed')" class="status-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-status="confirmed">Подтверждённые</button>
+                    <button onclick="setStatusFilter('production')" class="status-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-status="production">В производстве</button>
+                </div>
+            </div>
+
+            <!-- Таблица заявок -->
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 p-6">
+                <h2 class="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">Список заказов</h2>
                 
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="border-b border-slate-200">
-                                <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600">№</th>
-                                <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600">Агент</th>
-                                <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600">Статус</th>
-                                <th class="text-right py-3 px-4 text-sm font-semibold text-slate-600">Сумма</th>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600 dark:text-slate-400">№</th>
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600 dark:text-slate-400">Агент</th>
+                                <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600 dark:text-slate-400">Статус</th>
+                                <th class="text-right py-3 px-4 text-sm font-semibold text-slate-600 dark:text-slate-400">Сумма</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b border-slate-100 hover:bg-slate-50">
-                                <td class="py-4 px-4 text-sm font-semibold text-blue-600">1</td>
+                        <tbody id="orders-table-body">
+                            <tr class="order-row border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50" data-status="new" data-name="1 компьютер-сервис">
+                                <td class="py-4 px-4 text-sm font-semibold text-blue-600 dark:text-blue-400">1</td>
                                 <td class="py-4 px-4 text-sm">Компьютер-Сервис</td>
                                 <td class="py-4 px-4 text-sm">
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-semibold">Новый</span>
+                                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-md text-xs font-semibold">Новый</span>
                                 </td>
                                 <td class="py-4 px-4 text-sm text-right">75 000 ₽</td>
                             </tr>
-                            <tr class="border-b border-slate-100 hover:bg-slate-50">
-                                <td class="py-4 px-4 text-sm font-semibold text-blue-600">2</td>
+                            <tr class="order-row border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50" data-status="confirmed" data-name="2 техномир">
+                                <td class="py-4 px-4 text-sm font-semibold text-blue-600 dark:text-blue-400">2</td>
                                 <td class="py-4 px-4 text-sm">ТехноМир</td>
                                 <td class="py-4 px-4 text-sm">
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-md text-xs font-semibold">Подтверждён</span>
+                                    <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-md text-xs font-semibold">Подтверждён</span>
                                 </td>
                                 <td class="py-4 px-4 text-sm text-right">95 000 ₽</td>
                             </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-4 text-sm font-semibold text-blue-600">3</td>
+                            <tr class="order-row hover:bg-slate-50 dark:hover:bg-slate-700/50" data-status="production" data-name="3 пк центр">
+                                <td class="py-4 px-4 text-sm font-semibold text-blue-600 dark:text-blue-400">3</td>
                                 <td class="py-4 px-4 text-sm">ПК Центр</td>
                                 <td class="py-4 px-4 text-sm">
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-semibold">В производстве</span>
+                                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-md text-xs font-semibold">В производстве</span>
                                 </td>
                                 <td class="py-4 px-4 text-sm text-right">82 000 ₽</td>
+                            </tr>
+                            <tr class="order-row border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50" data-status="new" data-name="4 игромир">
+                                <td class="py-4 px-4 text-sm font-semibold text-blue-600 dark:text-blue-400">4</td>
+                                <td class="py-4 px-4 text-sm">ИгроМир</td>
+                                <td class="py-4 px-4 text-sm">
+                                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-md text-xs font-semibold">Новый</span>
+                                </td>
+                                <td class="py-4 px-4 text-sm text-right">120 000 ₽</td>
+                            </tr>
+                            <tr class="order-row hover:bg-slate-50 dark:hover:bg-slate-700/50" data-status="confirmed" data-name="5 сфера it">
+                                <td class="py-4 px-4 text-sm font-semibold text-blue-600 dark:text-blue-400">5</td>
+                                <td class="py-4 px-4 text-sm">Сфера IT</td>
+                                <td class="py-4 px-4 text-sm">
+                                    <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-md text-xs font-semibold">Подтверждён</span>
+                                </td>
+                                <td class="py-4 px-4 text-sm text-right">68 000 ₽</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <div id="empty-state" class="hidden text-center py-8">
+                    <p class="text-3xl mb-2">🔍</p>
+                    <p class="text-slate-500 dark:text-slate-400">Заявка не найдена.</p>
+                </div>
             </div>
         </div>
     </main>
+
+    <script src="/theme.js"></script>
+    <script>
+        let currentStatusFilter = 'all';
+        let currentSearch = '';
+
+        function setStatusFilter(status) {
+            currentStatusFilter = status;
+
+            document.querySelectorAll('.status-btn').forEach(btn => {
+                const isActive = btn.dataset.status === status;
+                btn.classList.toggle('bg-blue-600', isActive);
+                btn.classList.toggle('text-white', isActive);
+                btn.classList.toggle('bg-slate-200', !isActive);
+                btn.classList.toggle('dark:bg-slate-700', !isActive);
+                btn.classList.toggle('text-slate-800', !isActive);
+                btn.classList.toggle('dark:text-slate-200', !isActive);
+            });
+
+            filterOrders();
+        }
+
+        function filterOrders() {
+            currentSearch = document.getElementById('search-input').value.toLowerCase();
+
+            const rows = document.querySelectorAll('.order-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                const name = row.dataset.name;
+
+                const matchStatus = currentStatusFilter === 'all' || status === currentStatusFilter;
+                const matchSearch = name.includes(currentSearch);
+
+                if (matchStatus && matchSearch) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('empty-state').classList.toggle('hidden', visibleCount > 0);
+        }
+    </script>
 </body>
 </html>
