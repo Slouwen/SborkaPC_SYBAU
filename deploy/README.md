@@ -1,28 +1,12 @@
-# Деплой проекта «Сборка и реализация компьютеров»
+# SborkaPC Deploy
 
-## Схема архитектуры
+Отдельный репозиторий для запуска готового контейнера приложения. Основной репозиторий собирает и публикует Docker image в GHCR.
 
-Браузер (https://sborkapc.localhost) → Nginx (443, HTTPS) → App (Node.js + Express, порт 3000).
+## Запуск
 
-База данных не используется. Все данные статичны (HTML).
+1. Установите Docker Engine и Docker Compose.
+2. Скопируйте `.env.example` в `.env` и укажите секретный ключ Supabase.
+3. Положите локальные сертификаты `sborkapc.localhost.pem` и `sborkapc.localhost-key.pem` в `certs/`. Не коммитьте приватный ключ.
+4. Запустите `docker compose up -d`.
 
-## Сервисы
-
-| Сервис | Технология | Внутренний порт | Продакшен-сервер |
-|---|---|---|---|
-| app | Node.js + Express | 3000 | node app.js (NODE_ENV=production) |
-| nginx | nginx:1.27-alpine | 80, 443 | — |
-
-## Переменные окружения и секреты
-
-Переменные окружения:
-- `NODE_ENV` — режим работы (`production`).
-
-Секреты:
-- Нет секретов (нет базы данных, нет ключей Firebase).
-
-## Команды запуска и остановки
-
-Запуск (из папки `deploy`):
-```bash
-docker compose up --build -d
+Образ: `ghcr.io/slouwen/sborkapc:latest`. Если пакет GHCR приватный, предварительно выполните `docker login ghcr.io`.

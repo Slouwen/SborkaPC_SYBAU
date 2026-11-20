@@ -1,8 +1,11 @@
 services:
   app:
-    build: ..
+    image: ghcr.io/slouwen/sborkapc:latest
     environment:
       NODE_ENV: production
+      PORT: 3000
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SECRET_KEY: ${SUPABASE_SECRET_KEY}
     restart: unless-stopped
 
   nginx:
